@@ -1,0 +1,31 @@
+{
+  "name": "learnnodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js.js",
+  "scripts": {
+    "start":" nodemon --inspect ./js.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NguyenMinhTho2207/learnNodeJs.git"
+  },
+  "keywords": [
+    "nodeJs",
+    "NMT",
+    "ThoNguyen"
+  ],
+  "author": "ThoNguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NguyenMinhTho2207/learnNodeJs/issues"
+  },
+  "homepage": "https://github.com/NguyenMinhTho2207/learnNodeJs#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

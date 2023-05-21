@@ -4,6 +4,10 @@ const app = express()
 const port = 3000
 const morgan = require('morgan')
 const hbs = require('express-handlebars')
+
+app.use(express.static(path.join(__dirname, '\\public')));
+
+
 app.use(morgan('combined'))
 app.engine('hbs',hbs.engine({extname: '.hbs'}))
 

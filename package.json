@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/js.js",
   "scripts": {
+    "watch":"node-sass --watch src\\resources\\views\\scss\\ -o src\\public\\css\\",
     "start": " nodemon --inspect src/js.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
+    "node-sass": "^9.0.0",
     "nodemon": "^2.0.22"
   }
 }

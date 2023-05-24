@@ -12,6 +12,14 @@
     "type": "git",
     "url": "git+https://github.com/NguyenMinhTho2207/learnNodeJs.git"
   },
+  "lint-staged": {
+    "src/**/*.{js,hbs,json}": "prettier --single-quote --trailing-comma all --write"
+  },
+  "husky":{
+    "hook":{
+      "pre-commit":"lint-staged"
+    }
+  },
   "keywords": [
     "nodeJs",
     "NMT",
@@ -28,8 +36,11 @@
     "express-handlebars": "^7.0.7"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "morgan": "^1.10.0",
     "node-sass": "^9.0.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8"
   }
 }

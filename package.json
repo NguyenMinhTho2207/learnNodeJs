@@ -4,18 +4,14 @@
   "description": "",
   "main": "src/js.js",
   "scripts": {
+    "beautiful":"prettier --single-quote --trailing-comma all --write src/**/*.{js,json,hbs}",
     "watch": "node-sass --watch src\\resources\\views\\scss\\ -o src\\public\\css\\",
     "start": " nodemon --inspect src/js.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NguyenMinhTho2207/learnNodeJs.git"
-  },
-  "lint-staged": {
-    "src/**/*.{js,hbs,json}": "prettier --single-quote --trailing-comma all --write",
-    "*.{js,css,md}": "prettier --write"
   },
   "keywords": [
     "nodeJs",

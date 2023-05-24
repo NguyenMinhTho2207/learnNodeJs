@@ -15,9 +15,9 @@
   "lint-staged": {
     "src/**/*.{js,hbs,json}": "prettier --single-quote --trailing-comma all --write"
   },
-  "husky":{
-    "hook":{
-      "pre-commit":"lint-staged"
+  "husky": {
+    "hook": {
+      "pre-commit": "lint-staged"
     }
   },
   "keywords": [

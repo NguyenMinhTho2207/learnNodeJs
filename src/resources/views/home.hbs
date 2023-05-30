@@ -40,7 +40,30 @@
 
 function Validate(options) {
   const formValidate = document.querySelector(options.form)
-  
+  let selectorRules ={}
+  // Func Validate
+  function validate(elementForm,rule){
+      let erroMassage 
+      const formGroup = getParent(elementForm,options.formGroup)
+      let messageElement = formGroup.querySelector(options.formMassage)
+
+      let rules = selectorRules[rule.selector]
+      for(let i = 0; i < rules.length; i++){
+        if(rules[i](elementForm.value)){
+          erroMassage = rules[i](elementForm.value)
+          break
+        }
+
+      }
+      if(erroMassage){
+        messageElement.textContent = erroMassage
+        formGroup.classList.add('invalid')
+      }else{
+        messageElement.textContent = ''
+        formGroup.classList.remove('invalid')
+      }
+  }
+
   function getParent(element,selectorFormGroup){
     while(element.parentElement){
       if(element.parentElement.matches(selectorFormGroup)){
@@ -54,16 +77,29 @@ function Validate(options) {
 
   if(formValidate){
     options.rules.forEach(function(rule){
-      
+
+      // Save Rules
+      if(Array.isArray(selectorRules[rule.selector])){
+        selectorRules[rule.selector].push(rule.test)
+      }else{
+        selectorRules[rule.selector] = [rule.test]
+      }
       const elementForm = document.querySelector(rule.selector)
-      elementForm.onblur = function(){
-      let messageElement = getParent(elementForm,options.formGroup).querySelector(options.formMassage)
-      const erroMassage = rule.test(elementForm.value)
-      if(erroMassage){
-        messageElement.innertext = erroMassage
+     
+      
+      elementForm.onblur = function(){   
+        validate(elementForm,rule)
       }
+
+
+
+      elementForm.oninput = function(){
+        const formGroup = getParent(elementForm,options.formGroup)
+        let messageElement = formGroup.querySelector(options.formMassage)
+        messageElement.textContent = ''
+        formGroup.classList.remove('invalid')
       }
-    })
+    });
   }
 }
 
@@ -71,7 +107,7 @@ Validate.isRequired = function(selector) {
   return{
     selector,
     test(value){
-        return value ? undefined :'Trường này không được để trống'
+        return value.trim() ? undefined :'Trường này không được để trống'
     }
   }
 }
@@ -79,6 +115,29 @@ Validate.isEmail = function(selector) {
    return{
     selector,
     test(value){
+        let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        return value.match(regexEmail) ? undefined :'Trường này phải là email'
+    
+    }
+  }
+  
+}
+Validate.isPassword = function(selector,number) {
+   return{
+    selector,
+    test(value){
+        return value.length >= number ? undefined :`Mật khẩu ít nhất ${number} số`
+    
+    }
+  }
+  
+}
+
+Validate.isPasswordConfirmation = function(password,selector) {
+   return{
+    selector,
+    test(value){  
+        return value === password.value ? undefined :'Mật khẩu nhập lại không chính xác'
     
     }
   }
@@ -91,7 +150,10 @@ Validate.isEmail = function(selector) {
     formMassage:'.form-message',
     rules:[
           Validate.isRequired('#fullname'),
+          Validate.isRequired('#email'),
           Validate.isEmail('#email'),
+          Validate.isPassword('#password',6),
+          Validate.isPasswordConfirmation(document.querySelector('#password'),'#password_confirmation'),
     ],
   })
 </script>
